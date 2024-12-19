@@ -85,7 +85,6 @@
   }
 }
 
-
 #changelist {
   #filters-line-1 {
     #created-filter, #updated-filter {
@@ -221,7 +220,7 @@
 /* FILTER COLUMN */
 
 #changelist-filter {
-  display: none;
+  /* display: none; */
 }
 
 /* DATE DRILLDOWN */
@@ -257,7 +256,7 @@
 /* PAGINATOR */
 
 .paginator {
-  display: none;
+  /* display: none; */
   line-height: normal;
   padding: 0 !important;
   margin: 0;
@@ -398,6 +397,10 @@
       @include for-phone {
         text-align: center;
       }
+    }
+
+    span.all, span.action-counter, span.clear, span.question {
+      display: none;
     }
 
     span.clear {

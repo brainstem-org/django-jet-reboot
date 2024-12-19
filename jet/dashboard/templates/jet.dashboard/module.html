@@ -6,7 +6,7 @@
             <span class="dashboard-item-header-drag icon-grid"></span>
         {% endif %}
         <span class="dashboard-item-header-buttons">
-            <a href="{% url "jet-dashboard:update_module" pk=module.model.id %}" title="{% trans "Change" %}"><span class="icon-edit"></span></a>
+            <!-- <a href="{% url "jet-dashboard:update_module" pk=module.model.id %}" title="{% trans "Change" %}"><span class="icon-edit"></span></a> -->
 
             {% if module.deletable %}
                 <a href="#" title="{% trans "Delete" %}" class="dashboard-item-remove"><span class="icon-cross"></span></a>
