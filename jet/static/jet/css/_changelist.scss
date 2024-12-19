@@ -85,6 +85,23 @@
   }
 }
 
+
+#changelist {
+  #filters-line-1 {
+    #created-filter, #updated-filter {
+      display: none;
+
+      &.initialized {
+        display: block;
+      }
+
+      h3, ul, li {
+        display: inline;
+      }
+    }
+  }
+}
+
 /* TOOLBAR */
 
 #toolbar {
