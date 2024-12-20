@@ -143,12 +143,11 @@ $background-input-text-color: $text-color;
  */
 
 $warning-color: #e75e40;
-$warning-text-color: #fff;
 $info-color: #FCA326;
-$info-text-color: #fff;
+$info-text-color: #d49d9d;
 $success-color: #2d9fd8;
-$success-text-color: #fff;
-
+$warning-text-color: #d49d9d !default;
+$success-text-color: #82b982 !default;
 /*
  * Login
  */
