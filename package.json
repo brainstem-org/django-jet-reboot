@@ -49,6 +49,7 @@
     "jquery-ui/ui/widgets/sortable": "global:jQuery.ui.sortable",
     "jquery-ui/ui/widgets/tooltip": "global:jQuery.ui.tooltip",
     "jquery-ui/ui/widgets/autocomplete": "global:jQuery.ui.autocomplete",
+    "jquery.cookie": "global:jQuery.cookie",
     "select2": "global:jQuery.fn.select2",
     "timepicker": "global:jQuery.fn.timepicker"
   }

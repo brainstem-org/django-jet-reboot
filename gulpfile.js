@@ -48,6 +48,7 @@ function scripts() {
     .external('jquery-ui/ui/widgets/sortable')
     .external('jquery-ui/ui/widgets/tooltip')
     .external('jquery-ui/ui/widgets/autocomplete')
+    .external('jquery.cookie')
     .external('select2')
     .external('timepicker');
     

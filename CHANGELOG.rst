@@ -2,19 +2,22 @@ Changelog
 =========
 1.4.1
 -----
+* **CRITICAL FIX**: Fixed "Cannot find module 'jquery'" runtime error from jquery.cookie plugin
 * **BREAKING ARCHITECTURAL CHANGE**: Vendor libraries now loaded separately instead of bundled
 * **CRITICAL FIX**: Eliminated AMD/UMD conflicts by separating jQuery, jQuery UI, Select2, and Timepicker
-* Bundle size reduced by 79% (404KB → 85KB minified) - vendor libraries loaded separately
+* Added jquery.cookie (3KB) to vendor libraries - loaded separately before bundle
+* Bundle size reduced by 79% (404KB → 90KB minified) - vendor libraries loaded separately
 * Added vendor libraries to ``jet/static/jet/js/vendor/`` directory
 * Removed browserify standalone mode - no more UMD wrapper conflicts
 * Removed derequire workarounds - no longer needed with external libraries
 * **MIGRATION REQUIRED**: Users must add vendor script tags to templates (see ``VENDOR_LIBRARIES.md``)
-* Vendor libraries (jQuery 3.7.1, jQuery UI 1.13.3, Select2 4.0.13) loaded via <script> tags
+* Vendor libraries (jQuery 3.7.1, jQuery UI 1.13.3, jquery.cookie 1.4.1, Select2 4.0.13) loaded via <script> tags
 * Better browser caching - vendors cached separately from Jet code
 * No more "define is not a function" errors
 * Simpler build configuration with no workarounds
 * Standard architecture matching Django admin approach
 * See ``VENDOR_LIBRARIES.md`` for complete migration guide and template examples
+* See ``FIX_JQUERY_COOKIE.md`` for technical details on jquery.cookie fix
 
 1.4.0
 -----
