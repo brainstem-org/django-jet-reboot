@@ -1,5 +1,13 @@
 Changelog
 =========
+1.4.1
+-----
+* **CRITICAL FIX**: Fixed JavaScript bundle AMD format causing "define is not defined" errors
+* Rebuilt JavaScript bundle with browserify standalone option to create UMD wrapper
+* Bundle now exposes global window.JetAdmin instead of requiring AMD/RequireJS
+* Fixed dashboard modules failing to load when using AJAX
+* Both minified (bundle.min.js) and unminified (bundle.js) versions now built automatically
+
 1.4.0
 -----
 * **BREAKING SECURITY UPDATE**: Fixed critical jQuery XSS vulnerabilities (CVE-2020-11022, CVE-2020-11023)

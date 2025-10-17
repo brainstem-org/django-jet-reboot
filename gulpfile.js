@@ -27,8 +27,22 @@ var cssProcessors = [
 
 // JavaScript bundling task
 function scripts() {
-    return browserify('./jet/static/jet/js/src/main.js')
-        .bundle()
+    var bundler = browserify('./jet/static/jet/js/src/main.js', {
+        standalone: 'JetAdmin'  // Creates a standalone browser bundle instead of AMD/CommonJS
+    });
+    
+    // Create unminified bundle
+    var unminified = bundler.bundle()
+        .on('error', function(error) {
+            console.error('Browserify error:', error.message);
+            this.emit('end');
+        })
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest('./jet/static/jet/js/build/'));
+    
+    // Create minified bundle
+    var minified = bundler.bundle()
         .on('error', function(error) {
             console.error('Browserify error:', error.message);
             this.emit('end');
@@ -49,6 +63,8 @@ function scripts() {
             console.error('Dest error:', error);
             this.emit('end');
         });
+    
+    return merge(unminified, minified);
 }
 
 // SCSS compilation task
