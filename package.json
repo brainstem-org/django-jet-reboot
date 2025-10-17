@@ -1,8 +1,9 @@
 {
-  "name": "django-jet",
+  "name": "django-jet-reboot",
   "devDependencies": {
     "autoprefixer": "10.4.21",
     "browserify": "17.0.1",
+    "browserify-shim": "^3.8.16",
     "browsernizr": "2.3.0",
     "es6-promise": "4.2.8",
     "gulp": "^5.0.1",
@@ -26,5 +27,20 @@
     "timepicker": "https://github.com/geex-arts/timepicker",
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery",
+    "jquery-ui": "global:jQuery.ui",
+    "jquery-ui/ui/core": "global:jQuery.ui",
+    "jquery-ui/ui/widgets/datepicker": "global:jQuery.ui.datepicker",
+    "jquery-ui/ui/widgets/autocomplete": "global:jQuery.ui.autocomplete",
+    "jquery-ui/ui/widgets/sortable": "global:jQuery.ui.sortable",
+    "select2": "global:jQuery.fn.select2",
+    "timepicker": "global:jQuery.fn.timepicker"
   }
 }

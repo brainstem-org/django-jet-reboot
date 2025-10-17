@@ -1,4 +1,6 @@
-var $ = window.jQuery = require('jquery');
+// With browserify-shim, require('jquery') maps to window.jQuery
+// This is configured in package.json browserify-shim section
+var $ = require('jquery');
 
 jet = {
     jQuery: $

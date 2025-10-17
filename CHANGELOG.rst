@@ -2,11 +2,19 @@ Changelog
 =========
 1.4.1
 -----
-* **CRITICAL FIX**: Fixed JavaScript bundle AMD format causing "define is not defined" errors
-* Rebuilt JavaScript bundle with browserify standalone option to create UMD wrapper
-* Bundle now exposes global window.JetAdmin instead of requiring AMD/RequireJS
-* Fixed dashboard modules failing to load when using AJAX
-* Both minified (bundle.min.js) and unminified (bundle.js) versions now built automatically
+* **BREAKING ARCHITECTURAL CHANGE**: Vendor libraries now loaded separately instead of bundled
+* **CRITICAL FIX**: Eliminated AMD/UMD conflicts by separating jQuery, jQuery UI, Select2, and Timepicker
+* Bundle size reduced by 79% (404KB → 85KB minified) - vendor libraries loaded separately
+* Added vendor libraries to ``jet/static/jet/js/vendor/`` directory
+* Removed browserify standalone mode - no more UMD wrapper conflicts
+* Removed derequire workarounds - no longer needed with external libraries
+* **MIGRATION REQUIRED**: Users must add vendor script tags to templates (see ``VENDOR_LIBRARIES.md``)
+* Vendor libraries (jQuery 3.7.1, jQuery UI 1.13.3, Select2 4.0.13) loaded via <script> tags
+* Better browser caching - vendors cached separately from Jet code
+* No more "define is not a function" errors
+* Simpler build configuration with no workarounds
+* Standard architecture matching Django admin approach
+* See ``VENDOR_LIBRARIES.md`` for complete migration guide and template examples
 
 1.4.0
 -----

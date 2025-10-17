@@ -1,6 +1,6 @@
 # JavaScript Library Upgrade Validation Report
 **Date:** October 17, 2025  
-**Repository:** django-jet (brainstem-org/django-jet)  
+**Repository:** django-jet-reboot (brainstem-org/django-jet-reboot)  
 **Branch:** design
 
 ---
