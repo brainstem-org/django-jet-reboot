@@ -13,35 +13,74 @@
                 data.push($(this).data('value'));
             });
 
-            var chart = new Chart(ctx).Line({
-                labels: labels,
-                datasets: [
-                    {
-                        fillColor: $chart.find('.chart-fillColor').css('color'),
-                        strokeColor: $chart.find('.chart-strokeColor').css('color'),
-                        pointColor: $chart.find('.chart-pointColor').css('color'),
-                        pointHighlightFill: $chart.find('.chart-pointHighlightFill').css('color'),
-                        responsive: true,
-                        data: data
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Visitors',
+                            data: data,
+                            backgroundColor: $chart.find('.chart-fillColor').css('color'),
+                            borderColor: $chart.find('.chart-strokeColor').css('color'),
+                            pointBackgroundColor: $chart.find('.chart-pointColor').css('color'),
+                            pointBorderColor: $chart.find('.chart-pointHighlightFill').css('color'),
+                            pointHoverBackgroundColor: $chart.find('.chart-pointHighlightFill').css('color'),
+                            pointHoverBorderColor: $chart.find('.chart-strokeColor').css('color'),
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: $chart.find('.chart-scaleGridLineColor').css('color')
+                            },
+                            ticks: {
+                                color: $chart.find('.chart-scaleFontColor').css('color')
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: $chart.find('.chart-scaleGridLineColor').css('color')
+                            },
+                            ticks: {
+                                color: $chart.find('.chart-scaleFontColor').css('color')
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     }
-                ]
-            }, {
-                scaleGridLineColor: $chart.find('.chart-scaleGridLineColor').css('color'),
-                scaleLineColor: $chart.find('.chart-scaleLineColor').css('color'),
-                scaleFontColor: $chart.find('.chart-scaleFontColor').css('color')
+                }
             });
 
             var updateChartColors = function(chart) {
-                for (var i = 0; i < chart.datasets.length; ++i) {
-                    chart.datasets[i]['fillColor'] = $chart.find('.chart-fillColor').css('color');
-                    chart.datasets[i]['strokeColor'] = $chart.find('.chart-strokeColor').css('color');
-                    chart.datasets[i]['pointColor'] = $chart.find('.chart-pointColor').css('color');
-                    chart.datasets[i]['pointHighlightFill'] = $chart.find('.chart-pointHighlightFill').css('color');
-                }
+                // Update dataset colors
+                chart.data.datasets.forEach(function(dataset) {
+                    dataset.backgroundColor = $chart.find('.chart-fillColor').css('color');
+                    dataset.borderColor = $chart.find('.chart-strokeColor').css('color');
+                    dataset.pointBackgroundColor = $chart.find('.chart-pointColor').css('color');
+                    dataset.pointBorderColor = $chart.find('.chart-pointHighlightFill').css('color');
+                    dataset.pointHoverBackgroundColor = $chart.find('.chart-pointHighlightFill').css('color');
+                    dataset.pointHoverBorderColor = $chart.find('.chart-strokeColor').css('color');
+                });
 
-                chart.scale['gridLineColor'] = $chart.find('.chart-scaleGridLineColor').css('color');
-                chart.scale['lineColor'] = $chart.find('.chart-scaleLineColor').css('color');
-                chart.scale['textColor'] = $chart.find('.chart-scaleFontColor').css('color');
+                // Update scale colors
+                var gridColor = $chart.find('.chart-scaleGridLineColor').css('color');
+                var tickColor = $chart.find('.chart-scaleFontColor').css('color');
+                
+                chart.options.scales.y.grid.color = gridColor;
+                chart.options.scales.y.ticks.color = tickColor;
+                chart.options.scales.x.grid.color = gridColor;
+                chart.options.scales.x.ticks.color = tickColor;
 
                 chart.update();
             };

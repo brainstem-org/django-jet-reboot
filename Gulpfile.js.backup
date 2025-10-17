@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     concatCss = require('gulp-concat-css'),
     cleanCSS = require('gulp-clean-css'),
-    sass = require('gulp-sass')(require('sass')),
+    sass = require('gulp-sass'),
     uglify = require('gulp-uglify'),
     buffer = require('vinyl-buffer'),
     source = require('vinyl-source-stream'),
@@ -25,34 +25,19 @@ var cssProcessors = [
     })
 ];
 
-// JavaScript bundling task
-function scripts() {
+gulp.task('scripts', function() {
     return browserify('./jet/static/jet/js/src/main.js')
         .bundle()
         .on('error', function(error) {
-            console.error('Browserify error:', error.message);
-            this.emit('end');
+            console.error(error);
         })
         .pipe(source('bundle.min.js'))
         .pipe(buffer())
-        .on('error', function(error) {
-            console.error('Buffer error:', error);
-            this.emit('end');
-        })
         .pipe(uglify())
-        .on('error', function(error) {
-            console.error('Uglify error:', error);
-            this.emit('end');
-        })
-        .pipe(gulp.dest('./jet/static/jet/js/build/'))
-        .on('error', function(error) {
-            console.error('Dest error:', error);
-            this.emit('end');
-        });
-}
+        .pipe(gulp.dest('./jet/static/jet/js/build/'));
+});
 
-// SCSS compilation task
-function styles() {
+gulp.task('styles', function() {
     return gulp.src('./jet/static/jet/css/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -67,10 +52,9 @@ function styles() {
         })
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./jet/static/jet/css'));
-}
+});
 
-// Vendor styles task
-function vendorStyles() {
+gulp.task('vendor-styles', function() {
     return merge(
         gulp.src('./node_modules/jquery-ui/themes/base/images/*')
             .pipe(gulp.dest('./jet/static/jet/css/jquery-ui/images/')),
@@ -122,10 +106,9 @@ function vendorStyles() {
             })
             .pipe(gulp.dest('./jet/static/jet/css'))
     )
-}
+});
 
-// Vendor translations task
-function vendorTranslations() {
+gulp.task('vendor-translations', function() {
     return merge(
         gulp.src(['./node_modules/jquery-ui/ui/i18n/*.js'])
             .pipe(gulp.dest('./jet/static/jet/js/i18n/jquery-ui/')),
@@ -134,24 +117,14 @@ function vendorTranslations() {
         gulp.src(['./node_modules/select2/dist/js/i18n/*.js'])
             .pipe(gulp.dest('./jet/static/jet/js/i18n/select2/'))
     )
-}
+});
 
-// Watch task
-function watchFiles() {
-    gulp.watch('./jet/static/jet/js/src/**/*.js', scripts);
-    gulp.watch('./jet/static/jet/css/**/*.scss', styles);
+gulp.task('build', ['scripts', 'styles', 'vendor-styles', 'vendor-translations']);
+
+gulp.task('watch', function() {
+    gulp.watch('./jet/static/jet/js/src/**/*.js', ['scripts']);
+    gulp.watch('./jet/static/jet/css/**/*.scss', ['styles']);
     gulp.watch(['./jet/locale/**/*.po', './jet/dashboard/locale/**/*.po']);
-}
+});
 
-// Export tasks for CLI usage
-exports.scripts = scripts;
-exports.styles = styles;
-exports.vendorStyles = vendorStyles;
-exports.vendorTranslations = vendorTranslations;
-exports.watch = watchFiles;
-
-// Build task runs all build steps in parallel
-exports.build = gulp.parallel(scripts, styles, vendorStyles, vendorTranslations);
-
-// Default task
-exports.default = gulp.series(exports.build, watchFiles);
+gulp.task('default', ['build', 'watch']);

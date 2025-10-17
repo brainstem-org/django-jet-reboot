@@ -1,0 +1,26 @@
+{
+  "autoprefixer": {
+    "wanted": "6.4.0",
+    "latest": "10.4.21",
+    "dependent": "django-jet-reboot",
+    "location": "/Users/peterpetersen/Documents/GitHub/django-jet-reboot/node_modules/autoprefixer"
+  },
+  "gulp-postcss": {
+    "wanted": "6.1.1",
+    "latest": "10.0.0",
+    "dependent": "django-jet-reboot",
+    "location": "/Users/peterpetersen/Documents/GitHub/django-jet-reboot/node_modules/gulp-postcss"
+  },
+  "gulp-uglify": {
+    "wanted": "1.5.4",
+    "latest": "3.0.2",
+    "dependent": "django-jet-reboot",
+    "location": "/Users/peterpetersen/Documents/GitHub/django-jet-reboot/node_modules/gulp-uglify"
+  },
+  "jquery": {
+    "wanted": "1.12.4",
+    "latest": "3.7.1",
+    "dependent": "django-jet-reboot",
+    "location": "/Users/peterpetersen/Documents/GitHub/django-jet-reboot/node_modules/jquery"
+  }
+}
