@@ -1,5 +1,26 @@
 Changelog
 =========
+1.4.0
+-----
+* **BREAKING SECURITY UPDATE**: Fixed critical jQuery XSS vulnerabilities (CVE-2020-11022, CVE-2020-11023)
+* **Major**: Upgraded jQuery from 1.12.4 to 3.7.1
+* **Security**: Updated all JavaScript dependencies to latest secure versions
+* **Security**: Reduced npm security vulnerabilities from 39 to 4 (dev dependencies only, non-production)
+* Updated Gulp from 3.9.1 to 5.0.1 (major version upgrade)
+* Updated Browserify from 13.0.1 to 17.0.1
+* Updated gulp-postcss from 6.1.1 to 10.0.0
+* Updated 12+ other JavaScript build dependencies
+* Rebuilt and recompiled JavaScript bundle (bundle.min.js) and vendor CSS with updated dependencies
+* Fixed installation error when using modern setuptools (80.9.0+) and packaging library
+* Fixed version import issue in setup.py that prevented installation from GitHub
+* Added pyproject.toml with proper build dependencies including packaging>=20.0
+* Verified Django 4.2.17 compatibility
+* All JavaScript changes tested and validated in Django environment
+
+1.3.2
+-----
+* Previous release
+
 1.1.0
 -----
 * Django 3.0 compatibility

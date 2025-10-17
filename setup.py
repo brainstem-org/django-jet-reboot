@@ -16,15 +16,28 @@ def get_install_requires():
     return install_requires
 
 
+def get_version():
+    """Read version from jet/__init__.py without importing the module."""
+    version_file = os.path.join(os.path.dirname(__file__), 'jet', '__init__.py')
+    with open(version_file, encoding='utf-8') as f:
+        for line in f:
+            if line.startswith('VERSION'):
+                # Extract version string from VERSION='x.y.z'
+                return line.split('=')[1].strip().strip("'").strip('"')
+    raise RuntimeError('Unable to find version string.')
+
+
 setup(
     name='django-jet-reboot',
-    version=__import__('jet').VERSION,
+    version=get_version(),
     description='Modern template for Django admin interface with improved functionality',
     long_description=read('README.rst'),
+    long_description_content_type='text/x-rst',
     author='Denis Kildishev && assem-ch',
     url='https://github.com/assem-ch/django-jet-reboot',
     packages=find_packages(),
     license='AGPLv3',
+    python_requires='>=3.6',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
