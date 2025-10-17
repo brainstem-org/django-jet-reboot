@@ -31,7 +31,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
-from users.models.User import User
+# from users.models.User import User
 
 class JsonResponse(HttpResponse):
     """
@@ -58,8 +58,8 @@ def get_app_list(context, order=True):
     admin_site = get_admin_site(context)
     request = context['request']
 
-    if request.user.is_anonymous:
-        request.user = User.objects.get(email='AnonymousUser@brainstem.org')
+    # if request.user.is_anonymous:
+    #     request.user = User.objects.get(email='anonymoususer@brainstem.org')
 
     app_dict = {}
     for model, model_admin in admin_site._registry.items():

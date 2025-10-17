@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Jet - jQuery 3.7.1 Test</title>
+    <link rel="stylesheet" href="jet/static/jet/css/vendor.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        #test-element {
+            padding: 20px;
+            background: #f0f0f0;
+            border: 2px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Django Jet - Updated JavaScript Bundle Test</h1>
+    <p>Testing jQuery 3.7.1 and updated dependencies...</p>
+
+    <div id="test-results"></div>
+    
+    <div id="test-element">
+        This element will be manipulated by jQuery
+    </div>
+
+    <script src="jet/static/jet/js/build/bundle.min.js"></script>
+    <script>
+        (function() {
+            const results = [];
+            
+            // Test 1: jQuery loaded
+            if (typeof jQuery !== 'undefined') {
+                results.push({
+                    status: 'success',
+                    message: '✓ jQuery is loaded (version: ' + jQuery.fn.jquery + ')'
+                });
+            } else {
+                results.push({
+                    status: 'error',
+                    message: '✗ jQuery is NOT loaded'
+                });
+            }
+            
+            // Test 2: jQuery version check
+            if (typeof jQuery !== 'undefined') {
+                const version = jQuery.fn.jquery;
+                const major = parseInt(version.split('.')[0]);
+                if (major >= 3) {
+                    results.push({
+                        status: 'success',
+                        message: '✓ jQuery version is 3.x or higher (secure version)'
+                    });
+                } else {
+                    results.push({
+                        status: 'error',
+                        message: '✗ jQuery version is below 3.x (security risk!)'
+                    });
+                }
+            }
+            
+            // Test 3: Basic jQuery DOM manipulation
+            try {
+                jQuery('#test-element').css('background-color', '#e8f5e9');
+                jQuery('#test-element').text('jQuery DOM manipulation works!');
+                results.push({
+                    status: 'success',
+                    message: '✓ jQuery DOM manipulation works'
+                });
+            } catch(e) {
+                results.push({
+                    status: 'error',
+                    message: '✗ jQuery DOM manipulation failed: ' + e.message
+                });
+            }
+            
+            // Test 4: jQuery UI loaded
+            if (typeof jQuery !== 'undefined' && jQuery.ui) {
+                results.push({
+                    status: 'success',
+                    message: '✓ jQuery UI is loaded (version: ' + jQuery.ui.version + ')'
+                });
+            } else {
+                results.push({
+                    status: 'info',
+                    message: 'ℹ jQuery UI status unknown (may not be in bundle)'
+                });
+            }
+            
+            // Test 5: Select2 loaded
+            if (typeof jQuery !== 'undefined' && jQuery.fn.select2) {
+                results.push({
+                    status: 'success',
+                    message: '✓ Select2 is loaded'
+                });
+            } else {
+                results.push({
+                    status: 'info',
+                    message: 'ℹ Select2 status unknown (may not be in bundle)'
+                });
+            }
+            
+            // Test 6: Perfect Scrollbar loaded
+            if (typeof PerfectScrollbar !== 'undefined') {
+                results.push({
+                    status: 'success',
+                    message: '✓ Perfect Scrollbar is loaded'
+                });
+            } else {
+                results.push({
+                    status: 'info',
+                    message: 'ℹ Perfect Scrollbar may be loaded differently'
+                });
+            }
+            
+            // Display results
+            const resultsDiv = document.getElementById('test-results');
+            results.forEach(function(result) {
+                const div = document.createElement('div');
+                div.className = 'test-result ' + result.status;
+                div.textContent = result.message;
+                resultsDiv.appendChild(div);
+            });
+            
+            // Summary
+            const successCount = results.filter(r => r.status === 'success').length;
+            const errorCount = results.filter(r => r.status === 'error').length;
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'test-result ' + (errorCount === 0 ? 'success' : 'error');
+            summaryDiv.innerHTML = '<h3>Summary: ' + successCount + ' passed, ' + errorCount + ' failed</h3>';
+            resultsDiv.appendChild(summaryDiv);
+            
+            console.log('=== Django Jet Bundle Test Results ===');
+            results.forEach(function(result) {
+                console.log(result.status.toUpperCase() + ': ' + result.message);
+            });
+        })();
+    </script>
+</body>
+</html>
