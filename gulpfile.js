@@ -27,9 +27,30 @@ var cssProcessors = [
 
 // JavaScript bundling task
 function scripts() {
+    // Bundle only the custom Jet code - jQuery, jQuery UI, Select2 loaded separately
+    // Use browserify-shim to map requires to browser globals
     var bundler = browserify('./jet/static/jet/js/src/main.js', {
-        standalone: 'JetAdmin'  // Creates a standalone browser bundle instead of AMD/CommonJS
-    });
+        // No standalone mode - we're not creating a UMD module
+    })
+    // Mark these as external so they're not bundled
+    // browserify-shim (configured in package.json) will transform require() calls to window.jQuery etc
+    .external('jquery')
+    .external('jquery-ui/ui/core')
+    .external('jquery-ui/ui/position')
+    .external('jquery-ui/ui/widget')
+    .external('jquery-ui/ui/widgets/mouse')
+    .external('jquery-ui/ui/widgets/button')
+    .external('jquery-ui/ui/widgets/datepicker')
+    .external('jquery-ui/ui/widgets/dialog')
+    .external('jquery-ui/ui/widgets/draggable')
+    .external('jquery-ui/ui/widgets/droppable')
+    .external('jquery-ui/ui/widgets/resizable')
+    .external('jquery-ui/ui/widgets/sortable')
+    .external('jquery-ui/ui/widgets/tooltip')
+    .external('jquery-ui/ui/widgets/autocomplete')
+    .external('jquery.cookie')
+    .external('select2')
+    .external('timepicker');
     
     // Create unminified bundle
     var unminified = bundler.bundle()

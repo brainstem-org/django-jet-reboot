@@ -42,8 +42,17 @@
     var DATETIME_FORMAT = "{{ datetime_format }}";
 </script>
 <script type="text/javascript" src="{% url 'jet:jsi18n' %}"></script>
+
+{# Vendor libraries - MUST load BEFORE Jet bundle (v1.4.1+) #}
+<script src="{% static "jet/js/vendor/jquery.min.js" as url %}{{ url|jet_append_version }}"></script>
+<script src="{% static "jet/js/vendor/jquery-ui.min.js" as url %}{{ url|jet_append_version }}"></script>
+<script src="{% static "jet/js/vendor/jquery.cookie.js" as url %}{{ url|jet_append_version }}"></script>
+<script src="{% static "jet/js/vendor/select2.min.js" as url %}{{ url|jet_append_version }}"></script>
+<script src="{% static "jet/js/vendor/jquery.ui.timepicker.js" as url %}{{ url|jet_append_version }}"></script>
+
+{# Jet bundle - loads AFTER vendor libraries #}
 <script src="{% static "jet/js/build/bundle.min.js" as url %}{{ url|jet_append_version }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 {% jet_static_translation_urls as translation_urls %}
 {% for url in translation_urls %}
     <script src="{% static url as url %}{{ url|jet_append_version }}"></script>

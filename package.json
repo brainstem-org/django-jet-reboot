@@ -1,8 +1,9 @@
 {
-  "name": "django-jet",
+  "name": "django-jet-reboot",
   "devDependencies": {
     "autoprefixer": "10.4.21",
     "browserify": "17.0.1",
+    "browserify-shim": "^3.8.16",
     "browsernizr": "2.3.0",
     "es6-promise": "4.2.8",
     "gulp": "^5.0.1",
@@ -26,5 +27,30 @@
     "timepicker": "https://github.com/geex-arts/timepicker",
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery",
+    "jquery-ui": "global:jQuery.ui",
+    "jquery-ui/ui/core": "global:jQuery.ui",
+    "jquery-ui/ui/position": "global:jQuery.ui.position",
+    "jquery-ui/ui/widget": "global:jQuery.ui.widget",
+    "jquery-ui/ui/widgets/mouse": "global:jQuery.ui.mouse",
+    "jquery-ui/ui/widgets/button": "global:jQuery.ui.button",
+    "jquery-ui/ui/widgets/datepicker": "global:jQuery.ui.datepicker",
+    "jquery-ui/ui/widgets/dialog": "global:jQuery.ui.dialog",
+    "jquery-ui/ui/widgets/draggable": "global:jQuery.ui.draggable",
+    "jquery-ui/ui/widgets/droppable": "global:jQuery.ui.droppable",
+    "jquery-ui/ui/widgets/resizable": "global:jQuery.ui.resizable",
+    "jquery-ui/ui/widgets/sortable": "global:jQuery.ui.sortable",
+    "jquery-ui/ui/widgets/tooltip": "global:jQuery.ui.tooltip",
+    "jquery-ui/ui/widgets/autocomplete": "global:jQuery.ui.autocomplete",
+    "jquery.cookie": "global:jQuery.cookie",
+    "select2": "global:jQuery.fn.select2",
+    "timepicker": "global:jQuery.fn.timepicker"
   }
 }
