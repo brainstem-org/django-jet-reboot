@@ -1,5 +1,12 @@
 Changelog
 =========
+1.4.2
+-----
+* **CRITICAL FIX**: Removed Chart.js source map reference causing WhiteNoise collectstatic failures
+* Fixed "The file 'jet.dashboard/vendor/chart.js/chart.umd.js.map' could not be found" error
+* Chart.js now works properly with CompressedManifestStaticFilesStorage
+* No functional changes - deployment fix only
+
 1.4.1
 -----
 * **CRITICAL FIX**: Fixed "Cannot find module 'jquery'" runtime error from jquery.cookie plugin
