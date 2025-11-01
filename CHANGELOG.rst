@@ -1,5 +1,13 @@
 Changelog
 =========
+1.4.3
+-----
+* **BUG FIX**: Fixed ManyToMany "Select all" / "Deselect all" buttons not working in admin
+* Updated Select2 handlers to use v4 API (.val() + .trigger('change')) instead of deprecated v3 API (.select2('val'))
+* Select all button now correctly selects all options instead of reverting to first value
+* Deselect all button now properly clears selection instead of undefined behavior
+* Recompiled JavaScript bundle with the fix
+
 1.4.2
 -----
 * **CRITICAL FIX**: Removed Chart.js source map reference causing WhiteNoise collectstatic failures
