@@ -123,23 +123,23 @@ Select2.prototype = {
 
             var $element = this.$element;
 
-            $dropdown.find('.select2-buttons-button-select-all').on('click', function (e) {
-                e.preventDefault();
-                var selected = [];
-                $element.find('option').each(function () {
-                    selected.push($(this).val());
-                });
-                $element.select2('val', selected);
-                $element.select2('close');
+        $dropdown.find('.select2-buttons-button-select-all').on('click', function (e) {
+            e.preventDefault();
+            var selected = [];
+            $element.find('option').each(function () {
+                selected.push($(this).val());
             });
+            // Use Select2 v4 API: .val() + .trigger('change')
+            $element.val(selected).trigger('change');
+            $element.select2('close');
+        });
 
-            $dropdown.find('.select2-buttons-button-deselect-all').on('click', function (e) {
-                e.preventDefault();
-                $element.select2('val', '');
-                $element.select2('close');
-            });
-
-            $dropdown.attr('dir', this.options.get('dir'));
+        $dropdown.find('.select2-buttons-button-deselect-all').on('click', function (e) {
+            e.preventDefault();
+            // Use Select2 v4 API: .val() + .trigger('change')
+            $element.val([]).trigger('change');
+            $element.select2('close');
+        });            $dropdown.attr('dir', this.options.get('dir'));
             this.$dropdown = $dropdown;
             return $dropdown;
         };
