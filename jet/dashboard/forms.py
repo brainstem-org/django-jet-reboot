@@ -76,11 +76,17 @@ class AddUserDashboardModuleForm(forms.ModelForm):
             index_dashboard_cls = get_current_dashboard('app_index' if data['app_label'] else 'index')
             index_dashboard = index_dashboard_cls({'request': self.request}, app_label=data['app_label'])
 
-            if 'type' in data:
+            if 'type' in data and 'module' in data:
+                module_index = data['module']
+                
                 if data['type'] == 'children':
-                    module = index_dashboard.children[data['module']]
+                    if module_index < 0 or module_index >= len(index_dashboard.children):
+                        raise ValidationError('Invalid module index')
+                    module = index_dashboard.children[module_index]
                 elif data['type'] == 'available_children':
-                    module = index_dashboard.available_children[data['module']]()
+                    if module_index < 0 or module_index >= len(index_dashboard.available_children):
+                        raise ValidationError('Invalid module index')
+                    module = index_dashboard.available_children[module_index]()
                 else:
                     raise ValidationError('error')
 
