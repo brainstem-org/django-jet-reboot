@@ -68,6 +68,7 @@ class AddUserDashboardModuleForm(forms.ModelForm):
 
     def clean(self):
         data = super(AddUserDashboardModuleForm, self).clean()
+        print(data)
 
         if not user_is_authenticated(self.request.user) or not self.request.user.is_staff:
             raise ValidationError('error')
@@ -75,18 +76,15 @@ class AddUserDashboardModuleForm(forms.ModelForm):
         if 'app_label' in data:
             index_dashboard_cls = get_current_dashboard('app_index' if data['app_label'] else 'index')
             index_dashboard = index_dashboard_cls({'request': self.request}, app_label=data['app_label'])
+            print(index_dashboard_cls)
+            print(index_dashboard)
+            print(index_dashboard.available_children)
 
-            if 'type' in data and 'module' in data:
-                module_index = data['module']
-                
+            if 'type' in data:
                 if data['type'] == 'children':
-                    if module_index < 0 or module_index >= len(index_dashboard.children):
-                        raise ValidationError('Invalid module index')
-                    module = index_dashboard.children[module_index]
+                    module = index_dashboard.children[data['module']]
                 elif data['type'] == 'available_children':
-                    if module_index < 0 or module_index >= len(index_dashboard.available_children):
-                        raise ValidationError('Invalid module index')
-                    module = index_dashboard.available_children[module_index]()
+                    module = index_dashboard.available_children[data['module']]()
                 else:
                     raise ValidationError('error')
 
