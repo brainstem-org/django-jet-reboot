@@ -68,7 +68,6 @@ class AddUserDashboardModuleForm(forms.ModelForm):
 
     def clean(self):
         data = super(AddUserDashboardModuleForm, self).clean()
-        print(data)
 
         if not user_is_authenticated(self.request.user) or not self.request.user.is_staff:
             raise ValidationError('error')
@@ -76,9 +75,6 @@ class AddUserDashboardModuleForm(forms.ModelForm):
         if 'app_label' in data:
             index_dashboard_cls = get_current_dashboard('app_index' if data['app_label'] else 'index')
             index_dashboard = index_dashboard_cls({'request': self.request}, app_label=data['app_label'])
-            print(index_dashboard_cls)
-            print(index_dashboard)
-            print(index_dashboard.available_children)
 
             if 'type' in data:
                 if data['type'] == 'children':
