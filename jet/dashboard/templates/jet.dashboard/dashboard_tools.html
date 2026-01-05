@@ -11,11 +11,13 @@
             {% csrf_token %}
             <select class="add-dashboard" name="module">
                 <option>{% trans "widgets" %}</option>
+                {% if available_children %}
                 <optgroup label="{% trans "available" %}">
                     {% for module in available_children %}
                         <option value="{{ forloop.counter0 }}" data-type="available_children">{{ module.title }}</option>
                     {% endfor %}
                 </optgroup>
+                {% endif %}
                 <optgroup label="{% trans "initials" %}">
                     {% for module in children %}
                         <option value="{{ forloop.counter0 }}" data-type="children">{{ module.title }}</option>
