@@ -1,5 +1,10 @@
 Changelog
 =========
+1.4.4
+-----
+* Enabling the dashboard tool menu again, making the dashboard customizable again!
+* Only shows menu with modules for signed in users.
+
 1.4.3
 -----
 * **BUG FIX**: Fixed ManyToMany "Select all" / "Deselect all" buttons not working in admin
